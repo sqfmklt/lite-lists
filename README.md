@@ -1,4 +1,4 @@
-;;<code>
+;;``
 (README
 
   (description
@@ -62,4 +62,4 @@
         
     (reference
       (see test\.scm for a small sample program))))
-;;</code>
+;;``
