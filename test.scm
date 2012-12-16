@@ -33,7 +33,6 @@
 ;; as documentation by example code.
 
 (require 'lite-lists)
-(require 'common-list-functions) ;; every
 
 
 
