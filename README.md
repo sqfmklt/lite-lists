@@ -36,7 +36,7 @@
       (notes
     
         (premise
-          (a common complain about lisp and scheme is the amount of parens)
+          (a common complaint about lisp and scheme is the amount of parens)
           (one quality I've noticed with lisp is that parens often stack up at the end of expressions)
           (I\'ve also seen the apply operator \, $ \, in Haskell used to reduce parens)
           (so why not do the same in lisp ?)
@@ -50,8 +50,8 @@
           (~ acts like $ except that it folds the list up towards the front instead of the back)
           (so ((((1 2) 3 4) 5 6) 7 8) can be represented as (1 2 ~ 3 4 ~ 5 6 ~ 7 8))
           (| acts like a text substitution macro for ")(")
-          (so (let ((a 1) (b 2) (c 3) (d 4)) (+ a b c d)) can be represented as (let ((a 1 | b 2 | c 3 | d 4)) (+ a b c d)))
-          (when | is used with $ \, let statements can sometimes be shorter (let ($ a 1 | b 2 | c 3 | d 4) $ + a b c d))
+          (so (let ((a 1) (b 2) (c 3) (d 4)) (+ a b c d)) can be represented as (let ((a 1 | b 2 | c 3 | d 4)) (+ a b c d))  )
+          (when | is used with $ \, let statements can sometimes be shorter (let ($ a 1 | b 2 | c 3 | d 4) $ + a b c d)  )
           (although the ability to do the above depends on the $ symbol being processed before |))
     
         (customization
