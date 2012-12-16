@@ -60,4 +60,8 @@
           (if you want to use different symbols \, you can \, see the macros (with-delimiter-mark with-end-mark with-begin-mark)))
             
         (reference
-          (see test\.scm for a small sample program))))
+          (see test\.scm for a small sample program)))
+
+      (license
+        (modified bsd)))
+     
