@@ -1,5 +1,5 @@
 This is the implementation that depends on r5rs scheme and slib
 to work.
 
-It has been test on:
+It has been tested on:
   scm
