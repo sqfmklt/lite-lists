@@ -2,8 +2,10 @@
     
       (description
         This is a small scheme library that provides a syntax that helps reduce the stacking
-        of parens in lisp code \. Right now it is supposed to integrate into a scheme implementation
-        that supports slib \, but it wouldn't be hard to port it)
+        of parens in lisp code. It should theoretically work on any scheme implementation that
+        supports r5rs slib. It has also been ported to r6rs scheme provided that the unportable
+        define-macro form is provided.
+        
     
       (installation
     
@@ -29,16 +31,16 @@
           (For more information about slib \, look here (url "http://people.csail.mit.edu/jaffer/SLIB.html")))
     
         (comment
-          You are free to use a different library system of course \. It wouldn't be hard to port to a more specific
-          module system offered by your scheme implementation \. A version that uses the r6rs module system will be
+          You are free to use a different library system of course. It wouldn't be hard to port to a more specific
+          module system offered by your scheme implementation. A version that uses portable r6rs will be
           coming soon \, and common lisp as well))
     
       (notes
     
         (premise
-          (a common complaint about lisp and scheme is the amount of parens)
-          (one quality I've noticed with lisp is that parens often stack up at the end of expressions)
-          (I've also seen the apply operator \, $ \, in Haskell used to reduce parens)
+          (a common complaint about lisp and scheme is the amount of parentheses)
+          (one quality I've noticed with lisp is that parentheses often stack up at the end of expressions)
+          (I've also seen the apply operator \, $ \, in Haskell used to reduce parentheses)
           (so why not do the same in lisp ?)
           (The $ symbol now starts a new list \, which will end at the same place as the outer list)
           (for example \, (define (inner-product l1 l2) (apply + (map * l1 l2))) can be represented
