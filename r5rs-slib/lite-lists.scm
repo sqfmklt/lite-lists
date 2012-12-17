@@ -116,15 +116,15 @@
     obj))
 
 ;;;;;;;;;;;;;;
-;; Similar to parse-delimeters.
+;; Similar to parse-delimiters.
 ;;
-;; lis is a list, where some of its items may make is-delimeter true.
+;; lis is a list, where some of its items may make is-delimiter true.
 ;;
 ;; outer-lis is a backwards results list. Parsed sublists of lis will
 ;;   be appended to the front of outer-lis in reverse order.
 ;;
 ;; The returned result maybe reversed, or used as a new outer-lis argument
-;; in further calls to rev-parse-delimeters.
+;; in further calls to rev-parse-delimiters.
 ;;
 (define (lite-lists:rev-parse-delimiters lis outer-lis is-delimiter)
   (let loop ((lis lis) (inner-acc '()) (outer-acc outer-lis))
@@ -134,10 +134,10 @@
  
 ;;;;;;;;;;;;;;
 ;; Finds all level 1 deep lists within lis and splits them on items that make
-;; is-delimeter true. The split components then reside in layer 0 of lis.
-;; Items in layer 0 of lis that make is-delimeter true are not affected.
+;; is-delimiter true. The split components then reside in layer 0 of lis.
+;; Items in layer 0 of lis that make is-delimiter true are not affected.
 ;;
-;; Example: (sub-parse-delimeters '(1 2 (3 4 | 5 6 | 7 8) 9 (10 | 11)) (lambda (x) (eq? x '|)))
+;; Example: (sub-parse-delimiters '(1 2 (3 4 | 5 6 | 7 8) 9 (10 | 11)) (lambda (x) (eq? x '|)))
 ;;       -> (1 2 (3 4) (5 6) (7 8) 9 (10) (11))
 ;;
 ;; The purpose of this is to make | act like a text substitution macro for )(
@@ -152,7 +152,7 @@
                  lis)))
 
 ;;;;;;;;;;;;;;
-;; Applies sub-parse-delimeters recursively to all inner lists within lis.
+;; Applies sub-parse-delimiters recursively to all inner lists within lis.
 ;;
 (define (lite-lists:rec-sub-parse-delimiters lis is-delimiter)
   (lite-lists:deep-map
