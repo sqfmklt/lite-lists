@@ -95,8 +95,6 @@
                  (cons (car lis) inner-acc)
                  outer-acc)))))
 
-(parse-delimiters '(1 2 / 3 4 / 5 6 / 7 8) (lambda (x) (eq x '/)))
-
 
 ;;;;;;;;;;;;;;
 ;; Collapses a list towards the front.
@@ -110,7 +108,6 @@
           ((funcall is-delimiter (car lis)) (loopi (cdr lis) (list (reverse acc))))
           (t (loopi (cdr lis) (cons (car lis) acc))))))
 
-(parse-beginnings '(1 2 / 3 4 / 5 6 / 7 8) (lambda (x) (eq x '/)))
 
 ;;;;;;;;;;;;;;
 ;; Collapses a list towards the back.
@@ -127,7 +124,6 @@
           ((funcall is-delimiter (car lis)) (loopi (cdr lis) (list acc)))
           (t (loopi (cdr lis) (cons (car lis) acc))))))
 
-(parse-endings '(1 2 / 3 4 / 5 6 / 7 8) (lambda (x) (eq x '/)))
 
 ;;;;;;;;;;;;;;
 ;; A map reduce like function used to factor the rec-parse-beginnings and rec-parse-endings functions.
@@ -149,8 +145,6 @@
       (parse-beginnings sub-lis is-delimiter))
     obj))
 
-(rec-parse-beginnings '(1 3 ( 2 3 / 2 3 / 34)  34 / 324) (lambda (x) (eq x '/)))
-
 ;;;;;;;;;;;;;;
 ;; Applies parse-ending recursively to all sublists within obj. This is the syntax transformer
 ;; function for the back list collapsing.
@@ -160,8 +154,6 @@
     (lambda (sub-lis)
       (parse-endings sub-lis is-delimiter))
     obj))
-
-(rec-parse-endings '(1 3 ( 2 3 / 2 3 / 34)  34 / 324) (lambda (x) (eq x '/)))
 
 ;;;;;;;;;;;;;;
 ;; Similar to parse-delimiters.
@@ -200,8 +192,6 @@
                    lis
                    :initial-value '())))
 
-(sub-parse-delimiters '(1 3 ( 2 3 / 2 3 / 34)  34 / 324) (lambda (x) (eq x '/)))
-
 ;;;;;;;;;;;;;;
 ;; Applies sub-parse-delimiters recursively to all inner lists within lis.
 ;;
@@ -210,8 +200,6 @@
     (lambda (sub-lis)
       (sub-parse-delimiters sub-lis is-delimiter))
     lis))
-
-(rec-sub-parse-delimiters '(1 3 ( 2 3 / 2 (3 / 33) / 34)  34 / 324) (lambda (x) (eq x '/)))
 
 ;; Macros:
 
