@@ -1,0 +1,2 @@
+This is the port for common lisp. It has been tested on sbcl using asdf. Just copy
+all the files to the place where asdf looks for systems.
