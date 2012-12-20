@@ -40,7 +40,7 @@
 ;; Not used, but may be useful for later modifications.
 ;; Takes a lis and returns a split on all items for which is-delimiter returns true.
 ;;
-;; Example: (parse-delimiters '(1 2 | 3 4 | 5 6) (lambda (x) (eq? x '|)))
+;; Example: (parse-delimiters '(1 2 % 3 4 % 5 6) (lambda (x) (eq? x '%)))
 ;;       -> ((1 2) (3 4) (5 6))
 ;;
 ;; sub-parse-delimiters ended up being used instead.
@@ -137,10 +137,10 @@
 ;; is-delimiter true. The split components then reside in layer 0 of lis.
 ;; Items in layer 0 of lis that make is-delimiter true are not affected.
 ;;
-;; Example: (sub-parse-delimiters '(1 2 (3 4 | 5 6 | 7 8) 9 (10 | 11)) (lambda (x) (eq? x '|)))
+;; Example: (sub-parse-delimiters '(1 2 (3 4 % 5 6 % 7 8) 9 (10 % 11)) (lambda (x) (eq? x '%)))
 ;;       -> (1 2 (3 4) (5 6) (7 8) 9 (10) (11))
 ;;
-;; The purpose of this is to make | act like a text substitution macro for )(
+;; The purpose of this is to make % act like a text substitution macro for )(
 ;; This type of macro transformation was too confusing for me to use.
 ;;
 (define (lite-lists:sub-parse-delimiters lis is-delimiter)
@@ -163,7 +163,7 @@
 
 ;; Macros:
 
-;; The macros takes a marker symbol as an argument so that you can use other symbols besides ~ | and $.
+;; The macros takes a marker symbol as an argument so that you can use other symbols besides ~ % and $.
 
 (defmacro (lite-lists:with-delimiter-mark marker . body)
   (cons 'begin (lite-lists:rec-sub-parse-delimiters body (lambda (x) (eq? x marker)))))
@@ -203,17 +203,17 @@
                            (lite-lists:rec-parse-beginnings line (lambda (x) (eq? x marker))))
                          reader))
 
-;; A print eval read loop that transforms expressions using the | ~ $ symbols for the delimiters.
+;; A print eval read loop that transforms expressions using the % ~ $ symbols for the delimiters.
 (define (lite-lists:repl)
-  (lite-lists:loop-eval-read (lite-lists:delimiter-reader '| (lite-lists:begin-reader '~ (lite-lists:end-reader '$ read)))
+  (lite-lists:loop-eval-read (lite-lists:delimiter-reader '% (lite-lists:begin-reader '~ (lite-lists:end-reader '$ read)))
                              lite-lists:line-printer))
 
 
-;; A macro that uses the | ~ $ symbols for the delimiters.
+;; A macro that uses the % ~ $ symbols for the delimiters.
 (defmacro (lite-lists:wrap-code . body)
   `(lite-lists:with-end-mark $
      (lite-lists:with-begin-mark ~
-       (lite-lists:with-delimiter-mark |
+       (lite-lists:with-delimiter-mark %
          ,@body))))
 
 

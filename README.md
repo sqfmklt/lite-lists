@@ -5,8 +5,60 @@
         of parens in lisp code. It should theoretically work on any scheme implementation that
         supports r5rs slib. It has also been ported to r6rs scheme provided that the unportable
         define-macro form is provided.
-        
-    
+
+
+      (examples
+        ((scheme
+
+          (define (factorial n)
+            (letrec ((helper (lambda (n acc)
+                               (if (= n 0)
+                                 acc
+                                 (helper (- n 1) (* n acc))))))
+              (helper n 1)))
+
+         );;scheme
+
+         (scheme-with-extension
+
+          (define (factorial n)
+            $ letrec ($ helper $ lambda (n acc)
+                          $ if (= n 0)
+                              acc
+                              $ helper (- n 1) $ * n acc)
+                $ helper n 1)
+
+         );;scheme-with-extension
+        )
+
+     
+       ((scheme
+
+         (define (split lis is-delimiter)
+           (let loop ((lis lis) (inner-acc '()) (outer-acc '()))
+             (cond ((null? lis)
+                    (reverse (cons (reverse inner-acc) outer-acc)))
+                   ((is-delimiter (car lis))
+                    (loop (cdr lis) '() (cons (reverse inner-acc) outer-acc)))
+                   (else
+                    (loop (cdr lis) (cons (car lis) inner-acc) outer-acc)))))
+        );;scheme
+
+        (scheme-with-extension
+
+         (define (split lis is-delimeter)
+           $ let loop ($ lis lis % inner-acc '() % outer-acc '())
+               $ cond ((null? lis)
+                       $ reverse $ cons (reverse inner-acc) outer-acc)
+                      ((is-delimeter $ car lis)
+                       $ loop (cdr lis) '() $ cons (reverse inner-acc) outer-acc)
+                      $ else
+                        $ loop (cdr lis) (cons (car lis) inner-acc) outer-acc)
+
+        );;scheme-with-extension
+       )
+      )
+
       (installation
     
         If you have a scheme implementation that supports slib \, you can use this script by doing the following
@@ -51,10 +103,10 @@
            more likely to result in confusion)
           (~ acts like $ except that it folds the list up towards the front instead of the back)
           (so ((((1 2) 3 4) 5 6) 7 8) can be represented as (1 2 ~ 3 4 ~ 5 6 ~ 7 8))
-          (| acts like a text substitution macro for ")(")
-          (so (let ((a 1) (b 2) (c 3) (d 4)) (+ a b c d)) can be represented as (let ((a 1 | b 2 | c 3 | d 4)) (+ a b c d))  )
-          (when | is used with $ \, let statements can sometimes be shorter (let ($ a 1 | b 2 | c 3 | d 4) $ + a b c d)  )
-          (although the ability to do the above depends on the $ symbol being processed before |))
+          (% acts like a text substitution macro for ")(")
+          (so (let ((a 1) (b 2) (c 3) (d 4)) (+ a b c d)) can be represented as (let ((a 1 % b 2 % c 3 % d 4)) (+ a b c d))  )
+          (when % is used with $ \, let statements can sometimes be shorter (let ($ a 1 % b 2 % c 3 % d 4) $ + a b c d)  )
+          (although the ability to do the above depends on the $ symbol being processed before %))
     
         (customization
           (the default macro is lite-lists:wrap-code)

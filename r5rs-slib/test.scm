@@ -56,7 +56,7 @@
       (loop (+ i 1) b (+ a b)))))
 
 (define (better-fibs n)
-  $ let loop ($ i 1 | a 0 | b 1)
+  $ let loop ($ i 1 % a 0 % b 1)
     $ if (= i n)
       b
       $ loop (+ i 1) b $ + a b)
@@ -68,7 +68,7 @@
       (loop (+ i 1) (cons i acc)))))
 
 (define (range i j)
-  $ let loop ($ i i | acc '())
+  $ let loop ($ i i % acc '())
     $ if (>= i j)
       (reverse acc)
       $ loop (+ i 1) $ cons i acc)
